@@ -1,7 +1,85 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PIKACHUMIAO的PAGE</title>
+  <!-- 加入基本的 CSS -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background-color: #f4f4f4;
+      color: #333;
+      margin: 20px;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+
+    h1 {
+      color: #5b5be0;
+    }
+
+    .output {
+      margin-top: 20px;
+      padding: 10px;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+  <!-- 頁面標題 -->
+  <h1>臨時作品集區</h1>
+  <p>作品集暫時放置YT方便觀賞</p>
+
+  <!-- 用來顯示 JavaScript 動態內容的區域 -->
+  <div class="output" id="outputArea">
+    <!-- 初始文字 -->
+    <p>這裡將顯示 JavaScript 程式輸出的內容。</p>
+  </div>
+
+  <!-- 引入 JavaScript -->
+  <script>
+
+
+
+
+    // 在 Console 顯示測試訊息
+    console.log('測試訊息已輸出到瀏覽器的開發者工具。');
+
+    // 動態更新網頁內容
+    //如果未使用到變數，則使用單引號包裹字串即可。
+    const outputArea = document.getElementById('outputArea');
+    outputArea.innerHTML = 
+    '<h2>PRODUCT</h2>';
+
+    //如果字串中使用到變數，則使用`包裹字串。
+    outputArea.innerHTML = `
+      <h2>@@@@</h2>
+      <p>現在是：${new Date().toLocaleString()}</p>
+
+
+    `;
+
+    // 使用 document.write 輸出簡單訊息
+    document.write('<p> 。</p>');
+  </script>
+ <h1>1.咖啡手磨改電動(可調速)</h1> <p><img src="./img/IMG_7019.jpg" alt="描述圖像的文字"  height="300"><a href="https://www.youtube.com/embed/OqBfOS8GRY0?si=tdwJE1H5FM3BQXTG" target="_blank">點擊這裡觀看影片</a></p>
+ <h1>2.Homekit SIRI直連智慧開關</h1> <p><img src="./img/IMG_7020.jpg" alt="描述圖像的文字"  height="300"></p>
+ <h1>3.電子哨改節律+分貝計→用於安親班小孩安靜哨</h1> <p><img src="./img/BILL.jpeg" alt="描述圖像的文字"  height="300"></p>
+ <h1>4.colab+python執行whisper,生成影片逐字稿</h1> <p><img src="./img/whi.png" alt="描述圖像的文字"  height="300"><a href="https://youtube.com/shorts/eRzYysmY3PY?si=tSVAcWHLmK5AncLu" target="_blank">點擊這裡觀看影片</a></p>
+
+
+
+
+
+
 </body>
+
 </html>
