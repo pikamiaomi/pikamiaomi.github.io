@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>申請表單</title>
+</head>
+<body>
+  <h2>申請表單</h2>
+
+  <label>申請廠商：</label>
+  <select id="companySelect" onchange="fillContact()">
+    <option value="">請選擇</option>
+    <option value="一新工程">一新工程</option>
+    <option value="鼎三電業">鼎三電業</option>
+    <option value="仕明營造">仕明營造</option>
+    <option value="永志威營造">永志威營造</option>
+    <option value="瑞溪營造">瑞溪營造</option>
+    <option value="慶灃工程">慶灃工程</option>
+    <option value="慶裕成營造">慶裕成營造</option>
+    <option value="custom">手動新增廠商</option>
+  </select>
+  <input type="text" id="customCompany" placeholder="請輸入廠商名稱" style="display:none;"><br><br>
+
+  <label>申請日期：</label>
+  <input type="date" id="date"><br><br>
+
+  <label>申請時間：</label>
+  <input type="text" id="time" placeholder="例如：08:00-18:00"><br><br>
+
+  <label>申請人數：</label>
+  <input type="number" id="people"><br><br>
+
+  <label>協勤地點：</label><br>
+  <textarea id="location" rows="4" cols="40"></textarea><br><br>
+
+  <label>聯絡人：</label>
+  <input type="text" id="contact"><br><br>
+
+  <label>聯絡人電話：</label>
+  <input type="text" id="phone"><br><br>
+
+  <label>協勤中隊:第二中隊：</label>
+  <select id="staffSelect" multiple size="6" onchange="fillStaffPhones()">
+    <option value="楊川杰">楊川杰</option>
+    <option value="李蜀安">李蜀安</option>
+    <option value="林芸彤">林芸彤</option>
+    <option value="賴秀玲">賴秀玲</option>
+    <option value="張繼振">張繼振</option>
+    <option value="張思婷">張思婷</option>
+    <option value="張束敏">張束敏</option>
+    <option value="洪志成">洪志成</option>
+    <option value="羅曉君">羅曉君</option>
+    <option value="賴美玉">賴美玉</option>
+    <option value="廖俊賢">廖俊賢</option>
+    <option value="張志星">張志星</option>
+    <option value="叢培國">叢培國</option>
+    <option value="陳世志">陳世志</option>
+    <option value="洪辰霖">洪辰霖</option>
+    <option value="吳雋元">吳雋元</option>
+    <option value="葉信宏">葉信宏</option>
+  </select><br><br>
+
+  <button onclick="generate()">產生結果</button>
+
+  <h3>申請結果：</h3>
+  <pre id="result"></pre>
+
+  <script>
+    const companies = {
+      "一新工程": { contact: "張廖萬陞", phone: "0911-815657" },
+      "鼎三電業": { contact: "白育綸", phone: "0975-769975" },
+      "仕明營造": { contact: "林思綺", phone: "0975-769975" },
+      "永志威營造": { contact: "廖仕農", phone: "0936-275023" },
+      "瑞溪營造": { contact: "吳聲炎", phone: "0972-912159" },
+      "慶灃工程": { contact: "李侑融", phone: "0976-213575" },
+      "慶裕成營造": { contact: "黃鈺涵（先生)", phone: "0923-350401" }
+    };
+
+    const staffPhones = {
+      "楊川杰": "0958-966211",
+      "李蜀安": "0903-155499",
+      "林芸彤": "0919-552927",
+      "賴秀玲": "0932-953316",
+      "張繼振": "0968-020202",
+      "張思婷": "0922-108662",
+      "張束敏": "0910-217475",
+      "洪志成": "0936-873871",
+      "羅曉君": "0979-609879",
+      "賴美玉": "0916-785666",
+      "廖俊賢": "0942-564390",
+      "張志星": "0935-272510",
+      "叢培國": "0987-498116",
+      "陳世志": "0933-447705",
+      "洪辰霖": "0965-205798",
+      "吳雋元": "0963-816103",
+      "葉信宏": "0927-038382"
+    };
+
+    function fillContact() {
+      const company = document.getElementById("companySelect").value;
+      const custom = document.getElementById("customCompany");
+      if (company === "custom") {
+        custom.style.display = "inline";
+        document.getElementById("contact").value = "";
+        document.getElementById("phone").value = "";
+      } else {
+        custom.style.display = "none";
+        if (companies[company]) {
+          document.getElementById("contact").value = companies[company].contact;
+          document.getElementById("phone").value = companies[company].phone;
+        }
+      }
+    }
+
+    function fillStaffPhones() {
+      const selected = Array.from(document.getElementById("staffSelect").selectedOptions).map(opt => {
+        return `${opt.value}：${staffPhones[opt.value]}`;
+      });
+      document.getElementById("staffPhones").value = selected.join("\n");
+    }
+
+    function generate() {
+      const companySel = document.getElementById("companySelect").value;
+      const company = companySel === "custom" ? document.getElementById("customCompany").value : companySel;
+      const date = document.getElementById("date").value;
+      const time = document.getElementById("time").value;
+      const people = document.getElementById("people").value;
+      const location = document.getElementById("location").value;
+      const contact = document.getElementById("contact").value;
+      const phone = document.getElementById("phone").value;
+      const staffList = Array.from(document.getElementById("staffSelect").selectedOptions).map(opt => `${opt.value}：${staffPhones[opt.value]}`).join("\n");
+
+      const result = `申請廠商：${company}
+申請日期與時間:
+${date}
+${time}
+申請人數:${people}人
+協勤地點：${location}
+聯絡人：${contact}
+聯絡人電話：${phone}
+協勤中隊：第二中隊
+${staffList}`;
+
+      document.getElementById("result").textContent = result;
+    }
+  </script>
+</body>
+</html>
